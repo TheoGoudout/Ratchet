@@ -70,6 +70,15 @@ class ServerProtocol implements MessageComponentInterface, WsServerInterface {
     /**
      * {@inheritdoc}
      */
+    public function onSubProtocolAgreed(ConnectionInterface $conn, string $subprotocol) {
+        if ($this->_decorating instanceof WsServerInterface) {
+            $this->_decorating->onSubProtocolAgreed($conn, $subprotocol);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function onOpen(ConnectionInterface $conn) {
         $decor = new WampConnection($conn);
         $this->connections->attach($conn, $decor);

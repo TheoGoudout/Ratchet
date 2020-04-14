@@ -100,6 +100,15 @@ class TopicManager implements WsServerInterface, WampServerInterface {
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function onSubProtocolAgreed(ConnectionInterface $conn, string $subprotocol) {
+        if ($this->app instanceof WsServerInterface) {
+            $this->app->onSubProtocolAgreed($conn, $subprotocol);
+        }
+    }
+
+    /**
      * @param string
      * @return Topic
      */
